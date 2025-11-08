@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日報タスク分析</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>日報タスク分析</h1>
+            <p class="subtitle">日報データからタスクを分析・可視化</p>
+        </header>
+
+        <div class="loading" id="loading">
+            <p>データを読み込んでいます...</p>
+        </div>
+
+        <div class="error" id="error" style="display: none;">
+            <p>エラーが発生しました。コンソールを確認してください。</p>
+        </div>
+
+        <div class="content" id="content" style="display: none;">
+            <!-- 統計サマリー -->
+            <section class="summary-section">
+                <h2>統計サマリー</h2>
+                <div class="summary-cards">
+                    <div class="summary-card">
+                        <div class="summary-label">総日報数</div>
+                        <div class="summary-value" id="total-reports">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">総タスク数</div>
+                        <div class="summary-value" id="total-tasks">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">平均タスク数/日</div>
+                        <div class="summary-value" id="avg-tasks">0</div>
+                    </div>
+                    <div class="summary-card">
+                        <div class="summary-label">分析期間</div>
+                        <div class="summary-value" id="date-range">-</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- タスク種類別分布 -->
+            <section class="chart-section">
+                <h2>タスク種類別分布</h2>
+                <div class="chart-card">
+                    <canvas id="taskTypeChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 時間帯別分布 -->
+            <section class="chart-section">
+                <h2>時間帯別タスク分布</h2>
+                <div class="chart-card">
+                    <canvas id="timeSlotChart"></canvas>
+                </div>
+            </section>
+
+            <!-- 日付別タスク数 -->
+            <section class="chart-section">
+                <h2>日付別タスク数</h2>
+                <div class="chart-card">
+                    <canvas id="dailyTaskChart"></canvas>
+                </div>
+            </section>
+
+            <!-- タスク出現頻度ランキング -->
+            <section class="chart-section">
+                <h2>タスク出現頻度ランキング（上位10件）</h2>
+                <div class="chart-card">
+                    <canvas id="taskFrequencyChart"></canvas>
+                </div>
+            </section>
+
+            <!-- タスク詳細表 -->
+            <section class="table-section">
+                <h2>タスク詳細</h2>
+                <div class="table-card">
+                    <table id="taskTable">
+                        <thead>
+                            <tr>
+                                <th>日付</th>
+                                <th>時間帯</th>
+                                <th>タスク種類</th>
+                                <th>タスク内容</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
